@@ -9,39 +9,43 @@ using System.Windows.Data;
 
 namespace WpfSamples
 {
-    public class WidthConverter : IValueConverter
+    public class WidthConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is double width)
+            if (values.Length >= 2 && values[0] is double textWidth && values[1] is double canvasWidth)
             {
-                return -width;
+                if (textWidth < canvasWidth)
+                    return 0;
+                return -textWidth;
             }
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return null;
         }
     }
 
-    public class DurationConverter : IValueConverter
+    public class DurationConverter : IMultiValueConverter
     {
         public float WidthForSecond = 50;
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double width)
+            if (values.Length >= 2 && values[0] is double textWidth && values[1] is double canvasWidth)
             {
-                int time = (int)(width / WidthForSecond);
-                Duration duration = new Duration(new TimeSpan(0,0, time));
+                if (textWidth < canvasWidth)
+                    return new Duration(new TimeSpan(0, 0, 0));
+                int time = (int)(textWidth / WidthForSecond);
+                Duration duration = new Duration(new TimeSpan(0, 0, time));
                 return duration;
             }
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return null;
         }

@@ -20,11 +20,11 @@
                 </Border>
             </Expander>
         </Border>
-        <ScrollViewer VerticalAlignment="Stretch">
+        <ScrollViewer >
             <Frame 
                 Name="myFrame" 
                 NavigationUIVisibility="Hidden"
-                VerticalAlignment="Stretch" />
+                 />
         </ScrollViewer>
     </DockPanel>
 </Window>

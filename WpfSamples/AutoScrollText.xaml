@@ -11,7 +11,18 @@
         <local:WidthConverter x:Key="widthConverter"/>
     </Page.Resources>
     <Grid>
-        <Canvas Width="200" Height="50" ClipToBounds="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Name="canvas" Grid.Row="1" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
             <TextBlock x:Name="text" FontSize="20" Text="滚起来吧1。。。 滚起来吧2。。。 滚起来吧3。。。">
                 <TextBlock.RenderTransform>
                     <TranslateTransform x:Name="trans" X="0"/>
@@ -23,14 +34,58 @@
                                 <DoubleAnimation
                                     Storyboard.TargetName="trans"
                                     Storyboard.TargetProperty="X"
-                                    To="{Binding ActualWidth, ElementName=text, Converter={StaticResource widthConverter}}" 
-                                    Duration="{Binding ActualWidth, ElementName=text, Converter={StaticResource durationConverter}}"
-                                    FillBehavior="Stop"/>
+                                    FillBehavior="Stop">
+                                    <DoubleAnimation.To>
+                                        <MultiBinding Converter="{StaticResource widthConverter}">
+                                            <Binding Path="ActualWidth" ElementName="text"/>
+                                            <Binding Path="ActualWidth" ElementName="canvas"/>
+                                        </MultiBinding>
+                                    </DoubleAnimation.To>
+                                    <DoubleAnimation.Duration>
+                                        <MultiBinding Converter="{StaticResource durationConverter}">
+                                            <Binding Path="ActualWidth" ElementName="text"/>
+                                            <Binding Path="ActualWidth" ElementName="canvas"/>
+                                        </MultiBinding>
+                                    </DoubleAnimation.Duration>
+                                </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
                 </TextBlock.Triggers>
             </TextBlock>
         </Canvas>
+        <Canvas x:Name="canvas1" Grid.Row="2" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
+            <TextBlock x:Name="text1" FontSize="20" Text="滚起来吧1">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform x:Name="trans1" X="0"/>
+                </TextBlock.RenderTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="trans1"
+                                    Storyboard.TargetProperty="X"
+                                    FillBehavior="Stop">
+                                    <DoubleAnimation.To>
+                                        <MultiBinding Converter="{StaticResource widthConverter}">
+                                            <Binding Path="ActualWidth" ElementName="text1"/>
+                                            <Binding Path="ActualWidth" ElementName="canvas1"/>
+                                        </MultiBinding>
+                                    </DoubleAnimation.To>
+                                    <DoubleAnimation.Duration>
+                                        <MultiBinding Converter="{StaticResource durationConverter}">
+                                            <Binding Path="ActualWidth" ElementName="text1"/>
+                                            <Binding Path="ActualWidth" ElementName="canvas1"/>
+                                        </MultiBinding>
+                                    </DoubleAnimation.Duration>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+        </Canvas>
+
     </Grid>
 </Page>
