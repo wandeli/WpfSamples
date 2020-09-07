@@ -4,4 +4,8 @@
     Title="AutoScrollText"
     Uri="AutoScrollText.xaml">
   </Example>
+  <Example
+    Title="ListBoxDemo"
+    Uri="ListBoxDemo.xaml">
+  </Example>
 </Examples>

@@ -5,25 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSamples"
         mc:Ignorable="d"
-        Title="AutoScrollText" Height="450" Width="800">
+        Title="AutoScrollText" >
     <Page.Resources>
         <local:DurationConverter x:Key="durationConverter"/>
         <local:WidthConverter x:Key="widthConverter"/>
     </Page.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <Canvas Name="canvas" Grid.Row="1" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
-            <TextBlock x:Name="text" FontSize="20" Text="滚起来吧1。。。 滚起来吧2。。。 滚起来吧3。。。">
+            <TextBlock x:Name="text" FontSize="20" Margin="5"  Text="滚起来吧1。。。 滚起来吧2。。。 滚起来吧3。。。">
                 <TextBlock.RenderTransform>
                     <TranslateTransform x:Name="trans" X="0"/>
                 </TextBlock.RenderTransform>
@@ -55,7 +56,7 @@
             </TextBlock>
         </Canvas>
         <Canvas x:Name="canvas1" Grid.Row="2" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
-            <TextBlock x:Name="text1" FontSize="20" Text="滚起来吧1">
+            <TextBlock x:Name="text1" Margin="5" FontSize="20" Text="滚起来吧1">
                 <TextBlock.RenderTransform>
                     <TranslateTransform x:Name="trans1" X="0"/>
                 </TextBlock.RenderTransform>
@@ -86,6 +87,6 @@
                 </TextBlock.Triggers>
             </TextBlock>
         </Canvas>
-
+        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="20" TextWrapping="Wrap" Text="啊实打实大苏打飒飒打撒 啊实打实大苏打飒飒打撒 啊实打实大苏打飒飒打撒"/>
     </Grid>
 </Page>
