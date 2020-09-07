@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Examples xmlns="">
+  <Example
+    Title="AutoScrollText"
+    Uri="AutoScrollText.xaml">
+  </Example>
+</Examples>

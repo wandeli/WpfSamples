@@ -17,7 +17,7 @@ namespace WpfSamples
     /// <summary>
     /// AutoScrollText.xaml 的交互逻辑
     /// </summary>
-    public partial class AutoScrollText : Window
+    public partial class AutoScrollText : Page
     {
         public AutoScrollText()
         {

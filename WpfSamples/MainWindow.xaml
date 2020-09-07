@@ -8,7 +8,23 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <Border DockPanel.Dock="Left">
-            
+            <Expander ExpandDirection="Left" IsExpanded="True">
+                <Border Margin="5,0">
+                    <ListBox Name="list" ItemsSource="{Binding Source={StaticResource ExampleData}}" SelectedIndex="0" SelectionChanged="ListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type ListBox}">
+                                <TextBlock Text="{Binding XPath=@Title}" Margin="5"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </Expander>
         </Border>
+        <ScrollViewer VerticalAlignment="Stretch">
+            <Frame 
+                Name="myFrame" 
+                NavigationUIVisibility="Hidden"
+                VerticalAlignment="Stretch" />
+        </ScrollViewer>
     </DockPanel>
 </Window>

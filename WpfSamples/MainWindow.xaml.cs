@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace WpfSamples
 {
@@ -23,6 +24,16 @@ namespace WpfSamples
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var el = (XmlElement)list.SelectedItem;
+            var att = el.Attributes["Uri"];
+            if (att != null)
+            {
+                myFrame.Navigate(new Uri(att.Value, UriKind.Relative));
+            }
         }
     }
 }
