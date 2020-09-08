@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WpfSamples
 {
     /// <summary>
-    /// ListBoxDemo.xaml 的交互逻辑
+    /// TabControlDemo.xaml 的交互逻辑
     /// </summary>
-    public partial class ListBoxDemo : Page
+    public partial class TabControlDemo : Page
     {
-        public ListBoxDemo()
+        public TabControlDemo()
         {
             InitializeComponent();
         }

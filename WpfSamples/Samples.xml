@@ -5,7 +5,11 @@
     Uri="AutoScrollText.xaml">
   </Example>
   <Example
-    Title="ListBoxDemo"
-    Uri="ListBoxDemo.xaml">
+    Title="AutoScrollTextDemo"
+    Uri="AutoScrollTextDemo.xaml">
+  </Example>
+  <Example
+    Title="TabControlDemo"
+    Uri="TabControlDemo.xaml">
   </Example>
 </Examples>

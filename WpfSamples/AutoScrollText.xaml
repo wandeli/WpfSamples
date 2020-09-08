@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="AutoScrollText" >
     <Page.Resources>
-        <local:DurationConverter x:Key="durationConverter"/>
+        <local:WidthDurationConverter x:Key="widthDurationConverter"/>
         <local:WidthConverter x:Key="widthConverter"/>
+        
     </Page.Resources>
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -43,7 +44,7 @@
                                         </MultiBinding>
                                     </DoubleAnimation.To>
                                     <DoubleAnimation.Duration>
-                                        <MultiBinding Converter="{StaticResource durationConverter}">
+                                        <MultiBinding Converter="{StaticResource widthDurationConverter}">
                                             <Binding Path="ActualWidth" ElementName="text"/>
                                             <Binding Path="ActualWidth" ElementName="canvas"/>
                                         </MultiBinding>
@@ -75,7 +76,7 @@
                                         </MultiBinding>
                                     </DoubleAnimation.To>
                                     <DoubleAnimation.Duration>
-                                        <MultiBinding Converter="{StaticResource durationConverter}">
+                                        <MultiBinding Converter="{StaticResource widthDurationConverter}">
                                             <Binding Path="ActualWidth" ElementName="text1"/>
                                             <Binding Path="ActualWidth" ElementName="canvas1"/>
                                         </MultiBinding>

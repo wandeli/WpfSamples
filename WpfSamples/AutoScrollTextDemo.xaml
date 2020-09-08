@@ -1,0 +1,132 @@
+﻿<Page x:Class="WpfSamples.AutoScrollTextDemo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfSamples"
+      mc:Ignorable="d" 
+      Title="ListBoxDemo">
+    <Page.Resources>
+        <XmlDataProvider x:Key="InventoryData" XPath="Inventory/Books">
+            <x:XData>
+                <Inventory xmlns="">
+                    <Books>
+                        <Book Text="长文本0  长文本1  长文本2  长文本3  长文本4  长文本5  长文本6  长文本7  长文本8  长文本9  长文本10&#13;长文本0  长文本1  长文本2  长文本3  长文本4  长文本5  长文本6  长文本7  长文本8  长文本9  长文本10"/>
+                        <Book Text="0-7356-1370-2" />
+                    </Books>
+                </Inventory>
+            </x:XData>
+        </XmlDataProvider>
+        <local:WidthDurationConverter x:Key="widthDurationConverter"/>
+        <local:WidthConverter x:Key="widthConverter"/>
+        <local:HeightDurationConverter x:Key="heightDurationConverter"/>
+        <local:HeightConverter x:Key="heightConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Source={StaticResource InventoryData}, XPath=Book}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Canvas Name="canvas" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
+                            <TextBlock x:Name="text" FontSize="20" Text="{Binding XPath=@Text}">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform x:Name="trans" X="0"/>
+                                </TextBlock.RenderTransform>
+                                <TextBlock.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="trans"
+                                                    Storyboard.TargetProperty="X"
+                                                    FillBehavior="Stop">
+                                                    <DoubleAnimation.To>
+                                                        <MultiBinding Converter="{StaticResource widthConverter}">
+                                                            <Binding Path="ActualWidth" ElementName="text"/>
+                                                            <Binding Path="ActualWidth" ElementName="canvas"/>
+                                                        </MultiBinding>
+                                                    </DoubleAnimation.To>
+                                                    <DoubleAnimation.Duration>
+                                                        <MultiBinding Converter="{StaticResource widthDurationConverter}">
+                                                            <Binding Path="ActualWidth" ElementName="text"/>
+                                                            <Binding Path="ActualWidth" ElementName="canvas"/>
+                                                        </MultiBinding>
+                                                    </DoubleAnimation.Duration>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </TextBlock.Triggers>
+                            </TextBlock>
+                        </Canvas>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListBox}},Path=ActualWidth}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <ListBox Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Source={StaticResource InventoryData}, XPath=Book}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Canvas Name="canvas" Grid.Column="1" Background="LightBlue" ClipToBounds="True">
+                            <TextBlock x:Name="text" FontSize="20" Margin="5"  Text="{Binding XPath=@Text}" Width="{Binding Path=ActualWidth, ElementName=canvas}" TextWrapping="Wrap">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform x:Name="trans" Y="0"/>
+                                </TextBlock.RenderTransform>
+                                <TextBlock.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="trans"
+                                                    Storyboard.TargetProperty="Y"
+                                                    FillBehavior="Stop">
+                                                    <DoubleAnimation.To>
+                                                        <MultiBinding Converter="{StaticResource heightConverter}">
+                                                            <Binding Path="ActualHeight" ElementName="text"/>
+                                                            <Binding Path="ActualHeight" ElementName="canvas"/>
+                                                        </MultiBinding>
+                                                    </DoubleAnimation.To>
+                                                    <DoubleAnimation.Duration>
+                                                        <MultiBinding Converter="{StaticResource heightDurationConverter}">
+                                                            <Binding Path="ActualHeight" ElementName="text"/>
+                                                            <Binding Path="ActualHeight" ElementName="canvas"/>
+                                                        </MultiBinding>
+                                                    </DoubleAnimation.Duration>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </TextBlock.Triggers>
+                            </TextBlock>
+                        </Canvas>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ListBox}},Path=ActualWidth}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+    </Grid>
+</Page>

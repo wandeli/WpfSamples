@@ -55,11 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TabControlDemo.xaml.cs">
+      <DependentUpon>TabControlDemo.xaml</DependentUpon>
+    </Compile>
     <Page Include="AutoScrollText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListBoxDemo.xaml">
+    <Page Include="AutoScrollTextDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,13 +78,17 @@
       <DependentUpon>AutoScrollText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters.cs" />
-    <Compile Include="ListBoxDemo.xaml.cs">
-      <DependentUpon>ListBoxDemo.xaml</DependentUpon>
+    <Compile Include="AutoScrollTextDemo.xaml.cs">
+      <DependentUpon>AutoScrollTextDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TabControlDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
