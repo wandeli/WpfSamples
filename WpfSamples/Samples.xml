@@ -12,4 +12,16 @@
     Title="TabControlDemo"
     Uri="TabControlDemo.xaml">
   </Example>
+  <Example
+      Title="ComboBoxDemo"
+      Uri="ComboBoxDemo.xaml">
+  </Example>
+  <Example
+      Title="Test"
+      Uri="Test.xaml">
+  </Example>
+  <Example
+    Title="Page1"
+    Uri="Page1.xaml">
+  </Example>
 </Examples>

@@ -31,6 +31,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="80">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
@@ -43,7 +44,7 @@
                                 </TextBlock.RenderTransform>
                                 <TextBlock.Triggers>
                                     <EventTrigger RoutedEvent="MouseEnter">
-                                        <BeginStoryboard>
+                                        <BeginStoryboard x:Name="sb">
                                             <Storyboard>
                                                 <DoubleAnimation
                                                     Storyboard.TargetName="trans"
@@ -65,9 +66,14 @@
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <StopStoryboard BeginStoryboardName="sb"/>
+                                    </EventTrigger>
                                 </TextBlock.Triggers>
                             </TextBlock>
                         </Canvas>
+      
+                        <Button Height="30" Grid.Column="2" x:Name="testbtn">test</Button>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

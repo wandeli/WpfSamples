@@ -16,7 +16,7 @@ namespace WpfSamples
             if (values.Length >= 2 && values[0] is double textWidth && values[1] is double canvasWidth)
             {
                 if (textWidth <= canvasWidth)
-                    return 0;
+                    return null;
                 return -textWidth;
             }
             return null;
@@ -58,7 +58,7 @@ namespace WpfSamples
             if (values.Length >= 2 && values[0] is double textHeight && values[1] is double canvasHeight)
             {
                 if (textHeight <= canvasHeight)
-                    return 0;
+                    return null;
                 return -textHeight;
             }
             return null;
