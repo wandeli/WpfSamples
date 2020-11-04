@@ -20,11 +20,9 @@
                 </Border>
             </Expander>
         </Border>
-        <ScrollViewer >
-            <Frame 
+        <Frame 
                 Name="myFrame" 
                 NavigationUIVisibility="Hidden"
                  />
-        </ScrollViewer>
     </DockPanel>
 </Window>

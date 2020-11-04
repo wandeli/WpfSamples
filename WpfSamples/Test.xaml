@@ -83,21 +83,21 @@
             </DataTemplate.Triggers>
         </DataTemplate>
     </Page.Resources>
-    <DockPanel>
+    <DockPanel Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}">
               <TextBlock Text="{Binding Count, StringFormat='{}{0} Items'}"
                DockPanel.Dock="Top"/>
         
-        <ItemsControl ItemsSource="{Binding}" Style="{StaticResource LogViewerStyle}">
+        <ItemsControl x:Name="aa" ItemsSource="{Binding}" >
             <ItemsControl.Template>
                 <ControlTemplate>
-                    <ScrollViewer CanContentScroll="True">
+                    <ScrollViewer Name="sv" CanContentScroll="True" ScrollChanged="ScrollViewer_ScrollChanged" Loaded="ScrollViewer_Loaded" Unloaded="ScrollViewer_Unloaded">
                         <ItemsPresenter/>
                     </ScrollViewer>
                 </ControlTemplate>
             </ItemsControl.Template>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True"/>
+                    <VirtualizingStackPanel IsItemsHost="True" VirtualizationMode="Recycling"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

@@ -39,24 +39,43 @@ namespace WpfSamples
             maxword = words.Count - 1;
 
             DataContext = LogEntries = new ObservableCollection<LogEntry>();
-            Console.WriteLine("1111");
-            Enumerable.Range(0, 20)
-                      .ToList()
-                      .ForEach(x => LogEntries.Add(GetRandomEntry()));
-            Console.WriteLine("2222");
-            Timer = new Timer(x => AddRandomEntry(), null, 1000, 10);
+            //Console.WriteLine("1111");
+            //Enumerable.Range(0, 20)
+                      //.ToList()
+                      //.ForEach(x => LogEntries.Add(GetRandomEntry()));
+            //Console.WriteLine("2222");
+            Timer = new Timer(x => AddRandomEntry(), null, 1000, 1000);
         }
 
         private System.Threading.Timer Timer;
         private System.Random random;
+        private int MaxCount = 60;
         private void AddRandomEntry()
         {
-            Dispatcher.BeginInvoke((Action)(() => LogEntries.Add(GetRandomEntry())));
+            Dispatcher.BeginInvoke((Action)(() => {
+                LogEntry entry = GetRandomEntry();
+                LogEntries.Add(entry);
+                if (LogEntries.Count > MaxCount)
+                {
+                    LogEntries.RemoveAt(0);
+
+                }
+                
+                //items.ScrollIntoView(entry);
+                if(scrollViewer != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("ExtentHeight {0}", scrollViewer.ExtentHeight);
+                    Console.WriteLine("VerticalOffset {0}", scrollViewer.VerticalOffset);
+                    Console.WriteLine("ScrollableHeight {0}", scrollViewer.ScrollableHeight);
+                    scrollViewer.ScrollToEnd();
+                }
+            }));
         }
 
         private LogEntry GetRandomEntry()
         {
-            if (random.Next(1, 10) > 1)
+            //if (random.Next(1, 10) > 1)
             {
                 return new LogEntry()
                 {
@@ -66,7 +85,7 @@ namespace WpfSamples
                                                          .Select(x => words[random.Next(0, maxword)])),
                 };
             }
-
+            /*
             return new CollapsibleLogEntry()
             {
                 Index = index++,
@@ -77,7 +96,42 @@ namespace WpfSamples
                                                 .Select(i => GetRandomEntry())
                                                 .ToList()
             };
+            */
+        }
 
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            /*
+            if(sender is ScrollViewer viewer)
+            {
+                Console.WriteLine();
+                Console.WriteLine("ExtentHeight {0}", e.ExtentHeight);
+                Console.WriteLine("ExtentHeightChange {0}", e.ExtentHeightChange);              
+                Console.WriteLine("ViewportHeight {0}", e.ViewportHeight);
+                Console.WriteLine("ViewportHeightChange {0}", e.ViewportHeightChange);
+                Console.WriteLine("VerticalOffset {0}", viewer.VerticalOffset);
+                Console.WriteLine("ScrollableHeight {0}", viewer.ScrollableHeight);
+                //viewer.ScrollToVerticalOffset(e.ExtentHeight);
+                if(e.ExtentHeight < MaxCount)
+                {
+                    //viewer.ScrollToVerticalOffset(viewer.ScrollableHeight);
+                }
+                //viewer.ScrollToEnd();
+            }
+            */
+        }
+
+        private ScrollViewer scrollViewer = null;
+        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            scrollViewer = sender as ScrollViewer;
+            Console.WriteLine("ScrollViewer_Loaded");
+        }
+
+        private void ScrollViewer_Unloaded(object sender, RoutedEventArgs e)
+        {
+            scrollViewer = null;
+            Console.WriteLine("ScrollViewer_Unloaded");
         }
     }
 
