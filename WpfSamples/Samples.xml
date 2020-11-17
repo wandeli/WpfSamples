@@ -24,4 +24,8 @@
     Title="Page1"
     Uri="Page1.xaml">
   </Example>
+  <Example
+  Title="ProgressPage"
+  Uri="ProgressPage.xaml">
+  </Example>
 </Examples>
