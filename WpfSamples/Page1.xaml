@@ -257,6 +257,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
@@ -590,5 +591,14 @@
                 </MenuItem.Resources>
             </MenuItem>
         </Menu>
+        <ListBox Grid.Row="3">
+            <ListBoxItem Content="111"/>
+            <ListBoxItem Content="222"/>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="test"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
     </Grid>
 </Page>

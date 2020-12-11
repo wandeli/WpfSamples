@@ -16,12 +16,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace WpfSamples
+namespace Test
 {
     /// <summary>
-    /// ProgressPage.xaml 的交互逻辑
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ProgressPage : Page, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,12 +30,10 @@ namespace WpfSamples
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
-        
-        public ProgressPage()
+
+        public MainWindow()
         {
             InitializeComponent();
-            
-
             PValue = 20;
             DispatcherTimer time = new DispatcherTimer
             {

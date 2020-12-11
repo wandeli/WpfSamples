@@ -28,4 +28,8 @@
   Title="ProgressPage"
   Uri="ProgressPage.xaml">
   </Example>
+  <Example
+  Title="MenuPage"
+  Uri="MenuPage.xaml">
+  </Example>
 </Examples>

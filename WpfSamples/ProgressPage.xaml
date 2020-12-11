@@ -7,11 +7,31 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProgressPage">
+    <Page.Resources>
+        <Style x:Key="CircularProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                            <local:Circle Fill="Transparent" Stroke="LightGreen" StrokeThickness="5" Value="{TemplateBinding Value}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" Value="{Binding PValue}" Width="100" Height="100" Style="{StaticResource CircularProgressBarStyle}"/>
+        <local:Circle Grid.Row="1"  Value="{Binding PValue}" Height="50" Width="50" Fill="Transparent" Stroke="LightGreen" StrokeThickness="5"/>
+        <ProgressBar Grid.Row="2" Value="{Binding PValue}" Width="100" Height="20" />
 
-    <Grid>
-        <StackPanel Orientation="Vertical" Background="White">
-            <ProgressBar Width="100" Height="20" Margin="10" Value="40"/>
-            <local:Circle Height="50" Width="50" Value="37.5" Fill="Transparent" Stroke="LightGreen" StrokeThickness="5"/>
-        </StackPanel>
+        <TextBlock Text="{Binding PValue}"/>
     </Grid>
 </Page>

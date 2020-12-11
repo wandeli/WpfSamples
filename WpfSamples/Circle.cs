@@ -11,6 +11,23 @@ namespace WpfSamples
 {
     public class Circle : Shape
     {
+        /*
+        static Circle()
+        {
+            Brush myGreenBrush = new SolidColorBrush(Color.FromArgb(255, 6, 176, 37));
+            myGreenBrush.Freeze();
+
+            StrokeProperty.OverrideMetadata(
+                typeof(Circle),
+                new FrameworkPropertyMetadata(myGreenBrush));
+            FillProperty.OverrideMetadata(
+                typeof(Circle),
+                new FrameworkPropertyMetadata(Brushes.Transparent));
+            StrokeThicknessProperty.OverrideMetadata(
+                typeof(Circle),
+                new FrameworkPropertyMetadata(10.0));
+        }*/
+
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
@@ -18,7 +35,7 @@ namespace WpfSamples
         }
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(Circle), valueMetadata);
 
-        private static readonly FrameworkPropertyMetadata valueMetadata = new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender, null, new CoerceValueCallback(CoerceValue));
+        private static readonly FrameworkPropertyMetadata valueMetadata = new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender, ChangeCB, new CoerceValueCallback(CoerceValue));
 
         private static object CoerceValue(DependencyObject depObj, object baseVal)
         {
@@ -26,6 +43,11 @@ namespace WpfSamples
             val = Math.Min(val, 99.999);
             val = Math.Max(val, 0.0);
             return val;
+        }
+        
+        private static void ChangeCB(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Console.WriteLine(e.NewValue);
         }
 
         protected override Geometry DefiningGeometry
