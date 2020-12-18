@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,26 @@ namespace WpfSamples
     /// <summary>
     /// MenuPage.xaml 的交互逻辑
     /// </summary>
+
+    public class MenuPageItemData
+    {
+       public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+
     public partial class MenuPage : Page
     {
         public MenuPage()
         {
             InitializeComponent();
+            ObservableCollection<MenuPageItemData> data = new ObservableCollection<MenuPageItemData>();
+            data.Add(new MenuPageItemData { Name = "444444" });
+            data.Add(new MenuPageItemData { Name = "555555" });
+            DataContext = data;
         }
     }
 }

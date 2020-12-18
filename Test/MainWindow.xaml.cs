@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,7 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Test
@@ -44,6 +44,33 @@ namespace Test
             time.Start();
 
             DataContext = this;
+            CopyDir("source", @"F:\dest\dest");
+        }
+
+        public static void CopyDir(string source, string dest)
+        {
+            DirectoryInfo dir = new DirectoryInfo(source);
+            if (!dir.Exists)
+            {
+                return;
+            }
+  
+            Directory.CreateDirectory(dest);
+
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                string tempPath = Path.Combine(dest, file.Name);
+                if (!File.Exists(tempPath))
+                {
+                    file.CopyTo(tempPath, false);
+                    Console.WriteLine("copy to {0}", tempPath);
+                }
+            }
+            foreach (DirectoryInfo subdir in dir.GetDirectories())
+            {
+                string tempPath = Path.Combine(dest, subdir.Name);
+                CopyDir(subdir.FullName, tempPath);
+            }
         }
 
         private void Time_Tick(object sender, EventArgs e)

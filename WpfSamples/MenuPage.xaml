@@ -12,24 +12,79 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="CommonDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type local:MenuPageItemData}">
+                <Border>
+                    <ContentPresenter Content="{Binding Name}" />
+                </Border>
+            </DataTemplate>
+            <CollectionViewSource x:Key="Datas" Source="{Binding}"/>
+            
         </ResourceDictionary>
     </Page.Resources>
     <Grid Background="{StaticResource BgBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Menu VerticalAlignment="Center" Background="{StaticResource BgBrush}">
-            <MenuItem Header="请求" Foreground="White" Template="{DynamicResource MenuItemControlTemplateRootNoChild}"/>
-            <MenuItem Header="威威" Foreground="White" Template="{DynamicResource MenuItemControlTemplateRootHasChild}">
-                <MenuItem Header="呃呃" Template="{DynamicResource MenuItemControlTemplateChildNoChild}"/>
-                <MenuItem Header="让人" Template="{DynamicResource MenuItemControlTemplateChildHasChild}">
-                    <MenuItem Header="这周" Template="{DynamicResource MenuItemControlTemplateChildNoChild}"/>
-                    <MenuItem Header="消息" Template="{DynamicResource MenuItemControlTemplateChildNoChild}"/>
+        <Menu VerticalAlignment="Center" Background="{StaticResource BgBrush}" ItemContainerStyle="{StaticResource CustomMenuItemStyle}">
+            <MenuItem Header="请求"/>
+            <MenuItem Header="威威" ItemContainerStyle="{StaticResource CustomMenuItemStyle}">
+                <MenuItem Header="呃呃"/>
+                <MenuItem Header="让人" ItemContainerStyle="{StaticResource CustomMenuItemStyle}">
+                    <MenuItem Header="这周"/>
+                    <MenuItem Header="消息"/>
                     <Separator/>
-                    <MenuItem Header="存储" Template="{DynamicResource MenuItemControlTemplateChildNoChild}"/>
+                    <MenuItem Header="存储" />
+                </MenuItem>
+                <MenuItem Header="3333" ItemContainerStyle="{StaticResource CustomMenuItemStyle}">
+                    <MenuItem.ItemsSource>
+                        <CompositeCollection>
+                            <CollectionContainer Collection="{Binding Source={StaticResource Datas}}"/>
+                            <Separator/>
+                            <MenuItem Header="清除历史"/>
+                        </CompositeCollection>
+                    </MenuItem.ItemsSource>
                 </MenuItem>
             </MenuItem>
         </Menu>
+        <Menu Grid.Row="1" VerticalAlignment="Center" >
+            <MenuItem Header="请求"/>
+            <MenuItem Header="威威">
+                <MenuItem Header="呃呃"/>
+                <MenuItem Header="让人" >
+                    <MenuItem Header="这周"/>
+                    <MenuItem Header="消息" />
+                    <Separator/>
+                    <MenuItem Header="存储" />
+                </MenuItem>
+                <MenuItem Header="3333">
+                    <MenuItem.ItemsSource>
+                        <CompositeCollection>
+                            <CollectionContainer Collection="{Binding Source={StaticResource Datas}}"/>
+                            <Separator/>
+                            <MenuItem  Header="清除历史"/>
+                        </CompositeCollection>
+                    </MenuItem.ItemsSource>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Border Grid.Row="2" Background="Red" Width="200" Height="50">
+            <Border.ContextMenu>
+                <ContextMenu Style="{StaticResource CustomContextMenuStyle}" Foreground="White" ItemContainerStyle="{StaticResource CustomMenuItemStyle}">
+                    <MenuItem Header="奥萨"/>
+                    <MenuItem Header="奥萨" IsEnabled="False"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <Border Grid.Row="3" Background="Red" Width="200" Height="50">
+            <Border.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="奥萨" IsCheckable="True"/>
+                    <MenuItem Header="奥萨" IsEnabled="False"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
     </Grid>
 </Page>
